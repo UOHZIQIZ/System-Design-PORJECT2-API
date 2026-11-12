@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Project Record (PR)</title>
+<link rel="stylesheet" href="/styles.css">
+<script src="/app.js" defer></script>
+</head>
+<body><main>
+<header><p class="eyebrow">PR · SYSTEM DESIGN PROJECT 2</p><h1>Project Record</h1><p>Track project deadlines, progress, and next steps in one place.</p></header>
+<div class="layout">
+<section class="panel" aria-labelledby="form-title">
+<h2 id="form-title">Add project</h2>
+<form id="project-form">
+<label>Project title<input name="title" maxlength="120" required></label>
+<label>Course<input name="course" maxlength="80" required placeholder="e.g. System Design"></label>
+<label>Due date <span>(optional)</span><input type="date" name="dueDate"></label>
+<label>Status<select name="status"><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label>
+<label>Notes <span>(optional)</span><textarea name="notes" maxlength="1500" rows="3"></textarea></label>
+<div class="actions"><button type="submit" id="save">Save project</button><button type="button" class="secondary" id="cancel" hidden>Cancel edit</button></div>
+</form>
+</section>
+<section class="panel" aria-labelledby="list-title">
+<div class="list-heading"><h2 id="list-title">My projects</h2><label>Status filter<select id="filter"><option value="">All statuses</option><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label></div>
+<p id="notice" role="status"></p>
+<ul id="projects"></ul>
+</section>
+</div>
+</main></body>
+</html>
