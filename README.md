@@ -7,7 +7,8 @@ A small web app for students who want to keep projects, deadlines and progress i
 
 1. Install Node.js 24 or later and open this folder in VS Code.
 2. Run `npm ci` to install the MongoDB Node.js driver.
-3. Copy `.env.example` to `.env`. For a local MongoDB server, keep the example URI. For Atlas, create a database user with read/write access, allow your IP under Network Access, then paste the URI from **Connect → Drivers** into `MONGODB_URI`. Keep your real URI out of GitHub.
+3. Run `npm run setup:mongodb`. Enter your database name and paste the same complete connection string that works in Compass. The prompt hides the connection string. The script verifies the connection before saving it to the local `.env` file. Do not commit that file.
+   - To configure manually, copy `.env.example` to `.env` and set `MONGODB_URI` and `MONGODB_DB` there.
 4. Run `npm start`. The server checks the MongoDB connection before opening its HTTP port.
 5. Open http://127.0.0.1:3000. Start the Node server instead of double-clicking the HTML file: the server provides both the page and its API.
 6. Add a project, refresh, change its status, stop and restart the server, then delete it. Verify the saved value at each step.

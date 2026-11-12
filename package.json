@@ -7,7 +7,8 @@
     "node": ">=24"
   },
   "scripts": {
-    "start": "node --env-file-if-exists=.env backend/server.js"
+    "start": "node --env-file-if-exists=.env backend/server.js",
+    "setup:mongodb": "node scripts/setup-mongodb.js"
   },
   "dependencies": {
     "mongodb": "^7.0.0"
