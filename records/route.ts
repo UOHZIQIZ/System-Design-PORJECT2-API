@@ -1,0 +1,7 @@
+import { env } from '../../storage.mjs';
+function owner(r:Request){return r.headers.get('oai-authenticated-user-id');}
+export async function GET(r:Request){const o=owner(r);if(!o)return Response.json({error:'Please sign in'},{status:401});const rows=await env.DB!.prepare('SELECT id,kind,data FROM records WHERE owner = ? AND kind <> \'collaboration\'').bind(o).all();return Response.json(rows.results.map((x:any)=>({id:x.id,kind:x.kind,...JSON.parse(x.data)})));}
+export async function POST(r:Request){const o=owner(r);if(!o)return new Response('Unauthorized',{status:401});if(Number(r.headers.get('content-length')||0)>4000000)return new Response('Record is too large',{status:413});const body:any=await r.json();if(!body.id||!['project','note','source','folder','task'].includes(body.kind))return new Response('Invalid record',{status:400});const {id,kind,...data}=body;await env.DB!.prepare('INSERT INTO records (id,owner,kind,data) VALUES (?,?,?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data WHERE records.owner=excluded.owner AND records.kind=excluded.kind').bind(id,o,kind,JSON.stringify(data)).run();return Response.json({ok:true});}
+export async function DELETE(r:Request){const o=owner(r);if(!o)return new Response('Unauthorized',{status:401});const {id}:any=await r.json();await env.DB!.prepare('DELETE FROM records WHERE id = ? AND owner = ? AND kind <> \'collaboration\'').bind(id,o).run();return Response.json({ok:true});}
+
+export const PUT = POST;
