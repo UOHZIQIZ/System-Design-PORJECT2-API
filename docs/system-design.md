@@ -5,7 +5,7 @@
 
 ## Use cases
 
-The student can add an project, view saved projects, update its details or status, and delete it after confirming. The student can filter the list by status. Draw the student as the actor outside the system boundary and connect the actor to those use cases in your UML diagram.
+The student can add a project, view saved projects, update its details or status, and delete it after confirming. The student can filter the list by status. Draw the student as the actor outside the system boundary and connect the actor to those use cases in your UML diagram.
 
 ## Architecture
 
@@ -13,8 +13,8 @@ The student can add an project, view saved projects, update its details or statu
 flowchart TD
   A["Browser: HTML, CSS, JavaScript"]
   B["Node.js: /api/projects"]
-  C["Validation and prepared SQL"]
-  D["SQLite: projects table"]
+  C["Validation and MongoDB Node.js driver"]
+  D["MongoDB: projects collection"]
   A -->|"HTTP requests"| B
   B -->|"JSON or HTTP status"| A
   B --> C
@@ -25,12 +25,12 @@ flowchart TD
 
 | Field | Type | Rule |
 |---|---|---|
-| id | Text | Primary key; server-generated UUID |
-| title | Text | Required, up to 120 characters |
-| course | Text | Required, up to 80 characters |
-| dueDate | Text | Optional ISO date; empty string if omitted |
-| status | Text | planned, in-progress or completed; defaults to planned |
-| notes | Text | Optional; up to 1,500 characters |
-| updatedAt | Text | Server-generated ISO timestamp |
+| _id | String | Server-generated UUID; exposed as id by the API |
+| title | String | Required, up to 120 characters |
+| course | String | Required, up to 80 characters |
+| dueDate | String | Optional ISO date; empty string if omitted |
+| status | String | planned, in-progress or completed; defaults to planned |
+| notes | String | Optional; up to 1,500 characters |
+| updatedAt | String | Server-generated ISO timestamp |
 
-Capture evidence of an project created from the browser, an API response in Bruno, and the same record after restarting the server. Add your rationale, reference research, UI iterations and reflection as you work.
+Capture evidence of a project created from the browser, an API response in Bruno, and the same record after restarting the server. Add your rationale, reference research, UI iterations and reflection as you work.
