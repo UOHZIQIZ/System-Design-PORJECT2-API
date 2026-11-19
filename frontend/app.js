@@ -22,11 +22,18 @@ function el(tag,text,cls){
 }
 function render(){
   const visible=items.filter(item=>!filter.value||item.status===filter.value);
+  for(const [key,value] of Object.entries({total:items.length,progress:items.filter(item=>item.status==='in-progress').length,complete:items.filter(item=>item.status==='completed').length})){
+    document.querySelector('#'+key+'-count').textContent=loaded?value:'—';
+  }
   list.replaceChildren();
-  if(loaded&&!visible.length){list.append(el('li',filter.value?'No projects match this filter.':'No projects yet. Add your first one above or beside this list.'));return}
+  if(loaded&&!visible.length){list.append(el('li',filter.value?'No projects match this filter.':'No projects yet. Use the form to add your first project.'));return}
   for(const item of visible){
-    const row=el('li');
-    row.append(el('h3',item.title),el('p',item.course+' · '+(item.dueDate||'No due date')+' · '+labels[item.status],'meta'));
+    const row=el('li',null,'project-card');
+    const top=el('div',null,'project-top');
+    const badge=el('span',labels[item.status]||'Unknown status','badge');
+    badge.dataset.status=item.status;
+    top.append(el('h3',item.title),badge);
+    row.append(top,el('p',item.course+' · '+(item.dueDate?'Due '+item.dueDate:'No due date'),'meta'));
     if(item.notes)row.append(el('p',item.notes));
     const actions=el('div','','actions');
     const edit=el('button','Edit','secondary');
