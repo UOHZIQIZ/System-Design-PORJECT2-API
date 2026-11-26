@@ -26,3 +26,5 @@ ul{padding:0;margin:14px 0 0;list-style:none;display:grid;gap:10px}li{padding:15
 .color-tag[data-color="green"]{--dot:#4b9966}
 .color-tag[data-color="blue"]{--dot:#4b86c7}
 .color-tag[data-color="purple"]{--dot:#9d63b7}
+
+.color-tag{display:inline-block;width:12px;height:12px;padding:0;border:0;background:var(--dot,#63706c);vertical-align:middle}.color-tag::before{content:none}

@@ -36,7 +36,9 @@ function render(){
     top.append(el('h3',item.title),badge);
     row.append(top,el('p',item.course+' · '+(item.dueDate?'Due '+item.dueDate:'No due date'),'meta'));
     if(item.tagColor){
-      const tag=el('span',item.tagColor,'color-tag');
+      const tag=el('span',null,'color-tag');
+      tag.setAttribute('role','img');
+      tag.setAttribute('aria-label',item.tagColor+' tag');
       tag.dataset.color=item.tagColor;
       row.append(tag);
     }
