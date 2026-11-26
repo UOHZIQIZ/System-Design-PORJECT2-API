@@ -25,8 +25,10 @@ A small web app for students who want to keep projects, deadlines and progress i
 
 For POST and PUT, use `Content-Type: application/json` and send:
 ```json
-{"title":"Architecture diagram","course":"System Design","dueDate":"2026-11-20","status":"in-progress","notes":"Show the API and database."}
+{"title":"Architecture diagram","course":"System Design","dueDate":"2026-11-20","status":"in-progress","tagColor":"blue","notes":"Show the API and database."}
 ```
+Optional `tagColor` values are `red`, `orange`, `yellow`, `green`, `blue` and `purple`. Use an empty string to remove a tag. Omitting the field on update preserves the existing tag. Older records are shown as untagged. The dashboard can filter by tag and status together.
+
 Use the returned `id` in item requests. No login header is required in this classroom demo.
 
 ## Database and deployment

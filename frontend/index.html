@@ -18,6 +18,7 @@
 <div class="layout">
 <section class="panel" aria-labelledby="list-title">
 <div class="list-heading"><div><p class="section-label">WORKSPACE</p><h2 id="list-title">My projects</h2></div><label>Status filter<select id="filter"><option value="">All statuses</option><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label></div>
+<label class="tag-filter">Color tag<select id="tag-filter"><option value="">All tags</option><option value="untagged">No tag</option><option value="red">Red</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="blue">Blue</option><option value="purple">Purple</option></select></label>
 <p id="notice" role="status"></p>
 <ul id="projects"></ul>
 </section>
@@ -28,6 +29,7 @@
 <label>Course<input name="course" maxlength="80" required placeholder="e.g. System Design"></label>
 <label>Due date <span>(optional)</span><input type="date" name="dueDate"></label>
 <label>Status<select name="status"><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label>
+<label>Color tag<select name="tagColor"><option value="">No tag</option><option value="red">Red</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="blue">Blue</option><option value="purple">Purple</option></select></label>
 <label>Notes <span>(optional)</span><textarea name="notes" maxlength="1500" rows="3"></textarea></label>
 <div class="actions"><button type="submit" id="save">Save project</button><button type="button" class="secondary" id="cancel" hidden>Cancel edit</button></div>
 </form>

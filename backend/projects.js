@@ -1,7 +1,10 @@
 import {randomUUID} from 'node:crypto';
 
+const tagColors=new Set(['','red','orange','yellow','green','blue','purple']);
+
 function validate(value){
   if(!value||typeof value!=='object'||Array.isArray(value))return;
+  if(Object.hasOwn(value,'tagColor')&&!tagColors.has(value.tagColor))return;
   const title=typeof value.title==='string'?value.title.trim():'';
   const course=typeof value.course==='string'?value.course.trim():'';
   const {dueDate='',status='planned',notes=''}=value;
@@ -12,10 +15,10 @@ function validate(value){
     const date=new Date(dueDate+'T00:00:00Z');
     if(!Number.isFinite(+date)||date.toISOString().slice(0,10)!==dueDate)return;
   }
-  return {title,course,dueDate,status,notes:notes.trim(),updatedAt:new Date().toISOString()};
+  return {title,course,dueDate,status,...(Object.hasOwn(value,'tagColor')?{tagColor:value.tagColor}:{}),notes:notes.trim(),updatedAt:new Date().toISOString()};
 }
 
-const toProject=({_id,...fields})=>({id:_id,...fields});
+const toProject=({_id,...fields})=>({id:_id,tagColor:'',...fields});
 const notFound=()=>[404,{error:'Project not found.'}];
 
 export function createProjectHandler(collection){
@@ -35,9 +38,9 @@ export function createProjectHandler(collection){
       return result.deletedCount?[204]:notFound();
     }
     const fields=validate(body);
-    if(!fields)return [400,{error:'Check the title, course, due date, status and notes.'}];
+    if(!fields)return [400,{error:'Check the title, course, due date, status, color tag and notes.'}];
     if(method==='POST'){
-      const row={_id:randomUUID(),...fields};
+      const row={_id:randomUUID(),tagColor:'',...fields};
       await collection.insertOne(row);
       return [201,toProject(row)];
     }
