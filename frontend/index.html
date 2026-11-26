@@ -6,10 +6,12 @@
 <title>Project Record (PR)</title>
 <link rel="stylesheet" href="/styles.css">
 <script src="/app.js" defer></script>
+
 </head>
-<body><main>
-<nav class="mast"><span class="logo" aria-hidden="true">PR</span><strong>Project Record</strong><span class="context">Student workspace</span></nav>
-<header><p class="eyebrow">COURSEWORK DASHBOARD</p><h1>Project Record</h1><p>Track deadlines and progress across your courses.</p></header>
+<body>
+<div class="topbar"><nav class="mast" aria-label="Workspace"><span class="logo" aria-hidden="true">PR</span><strong>Project Record</strong></nav></div>
+<main>
+<header><h1>Project overview</h1><a href="#project-form" class="hero-link" id="new-project">＋ New project</a></header>
 <section class="stats" aria-label="Project overview">
 <div><span>All projects</span><strong id="total-count">—</strong></div>
 <div><span>In progress</span><strong id="progress-count">—</strong></div>
@@ -17,13 +19,18 @@
 </section>
 <div class="layout">
 <section class="panel" aria-labelledby="list-title">
-<div class="list-heading"><div><p class="section-label">WORKSPACE</p><h2 id="list-title">My projects</h2></div><label>Status filter<select id="filter"><option value="">All statuses</option><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label></div>
+<div class="list-heading"><div><h2 id="list-title">My projects</h2></div><button id="tag-settings" type="button" class="secondary">Rename tags</button></div>
+<div class="project-toolbar"><div class="actions view-controls"><button id="active-view" type="button" aria-pressed="true">Active</button><button id="archive-view" type="button" class="secondary" aria-pressed="false">Archive</button></div>
+<div class="filters"><label>Status filter<select id="filter"><option value="">All statuses</option><option value="planned">Planned</option><option value="in-progress">In progress</option><option value="completed">Completed</option></select></label>
 <label class="tag-filter">Color tag<select id="tag-filter"><option value="">All tags</option><option value="untagged">No tag</option><option value="red">Red</option><option value="orange">Orange</option><option value="yellow">Yellow</option><option value="green">Green</option><option value="blue">Blue</option><option value="purple">Purple</option></select></label>
+</div></div>
+<dialog id="tag-dialog"><form method="dialog"><h2>Rename color tags</h2><div id="tag-fields"></div><div class="actions"><button value="save">Save names</button><button value="cancel" class="secondary" formnovalidate>Cancel</button></div></form></dialog>
 <p id="notice" role="status"></p>
 <ul id="projects"></ul>
 </section>
-<section class="panel" aria-labelledby="form-title">
-<p class="section-label">PROJECT DETAILS</p><h2 id="form-title">Add project</h2>
+<aside class="rail"><section class="panel upcoming" aria-labelledby="upcoming-title"><h2 id="upcoming-title">Upcoming deadlines</h2><div id="upcoming"></div></section>
+<section class="panel editor-panel" aria-labelledby="form-title">
+<h2 id="form-title">Add project</h2>
 <form id="project-form">
 <label>Project title<input name="title" maxlength="120" required></label>
 <label>Course<input name="course" maxlength="80" required placeholder="e.g. System Design"></label>
@@ -33,8 +40,7 @@
 <label>Notes <span>(optional)</span><textarea name="notes" maxlength="1500" rows="3"></textarea></label>
 <div class="actions"><button type="submit" id="save">Save project</button><button type="button" class="secondary" id="cancel" hidden>Cancel edit</button></div>
 </form>
-</section>
-
+</section></aside>
 </div>
 </main></body>
 </html>
